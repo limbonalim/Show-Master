@@ -10,7 +10,6 @@ const items = [
 ];
 const Autocomplete = () => {
   return (
-    <div>
       <Typeahead
         id="Autocomplete"
         onChange={(selected) => {
@@ -20,7 +19,6 @@ const Autocomplete = () => {
         labelKey={option => `${option.label}`}
         options={items}
       />
-    </div>
   );
 };
 
