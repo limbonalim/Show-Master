@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const AxiosApi = axios.create({
+const axiosApi = axios.create({
   baseURL: 'http://api.tvmaze.com'
 });
 
-export default AxiosApi;
+export default axiosApi;
