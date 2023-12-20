@@ -2,15 +2,17 @@ import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
-import {selectCurrentShow} from '../../store/showSlice';
+import {selectCurrentShow, selectIsShowLoading} from '../../store/showSlice';
 import {fetchOneShow} from '../../store/showThunks';
 import {FormatDate} from '../../components/FormatDate/FormatDate';
 import {Show} from '../../types';
 import NoImage from '../../assets/NoImage.png';
+import Loader from '../../components/Loader/Loader';
 
 const ShowContainer = () => {
   const {id} = useParams();
-  let currentShow: Show = useAppSelector(selectCurrentShow);
+  const currentShow: Show = useAppSelector(selectCurrentShow);
+  const loading = useAppSelector(selectIsShowLoading);
   const dispatch = useAppDispatch();
   let image;
   let name;
@@ -93,21 +95,24 @@ const ShowContainer = () => {
   }
 
   return (
-    <>
-      {image}
-      {name}
-      {genres}
-      {type}
-      {country}
-      {language}
-      {rating}
-      <div>
-        {premiered}
-        {ended}
-      </div>
-      {status}
-      {website}
-      {summary}
+    <>{loading ? <Loader/> :
+      <>
+        {image}
+        {name}
+        {genres}
+        {type}
+        {country}
+        {language}
+        {rating}
+        <div>
+          {premiered}
+          {ended}
+        </div>
+        {status}
+        {website}
+        {summary}
+      </>
+    }
     </>
   );
 };

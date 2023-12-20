@@ -1,4 +1,3 @@
-
 const Home = () => {
   return (
     <div className="text-secondary text-center fs-4">

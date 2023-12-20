@@ -19,3 +19,8 @@ export interface Show {
   summary: string;
   type: string;
 }
+
+export interface Option {
+  label: string;
+  to: string;
+}

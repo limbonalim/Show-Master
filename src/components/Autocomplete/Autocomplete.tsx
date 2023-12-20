@@ -1,30 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {AsyncTypeahead, Menu} from 'react-bootstrap-typeahead';
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import {fetchShows} from '../../store/showThunks';
-import {selectSearchList} from '../../store/showSlice';
+import {selectIsSearchLoading, selectListOfOptions} from '../../store/showSlice';
 import {Link} from 'react-router-dom';
 
 const Autocomplete = () => {
   const dispatch = useAppDispatch();
-  const searchList = useAppSelector(selectSearchList);
-  const [options, setOptions] = useState([]);
+  const loading = useAppSelector(selectIsSearchLoading);
+  const options = useAppSelector(selectListOfOptions);
   const ref = React.createRef();
-
-  useEffect(() => {
-    if (searchList.length > 0) {
-      setOptions(searchList.map((item) => {
-        return {
-          label: item.show.name,
-          to: `/shows/${item.show.id}`,
-        };
-      }));
-    }
-  }, [searchList]);
 
   return (
     <AsyncTypeahead
       id="Autocomplete"
+      isLoading={loading}
       ref={ref}
       onSearch={async (query) => {
         await dispatch(fetchShows(query));
