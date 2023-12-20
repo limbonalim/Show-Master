@@ -1,9 +1,9 @@
 import React from 'react';
 import {AsyncTypeahead, Menu} from 'react-bootstrap-typeahead';
+import {Link} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import {fetchShows} from '../../store/showThunks';
 import {selectIsSearchLoading, selectListOfOptions} from '../../store/showSlice';
-import {Link} from 'react-router-dom';
 
 const Autocomplete = () => {
   const dispatch = useAppDispatch();

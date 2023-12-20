@@ -7,6 +7,8 @@ interface ShowState {
   isSearchLoading: boolean;
   isShowLoading: boolean;
   currentShow: Show | null;
+  isError: boolean;
+  errorMessage: string;
 }
 
 const initialState: ShowState = {
@@ -14,12 +16,19 @@ const initialState: ShowState = {
   isSearchLoading: false,
   isShowLoading: false,
   currentShow: null,
+  isError: false,
+  errorMessage: '',
 };
 
 export const showSlice = createSlice({
   name: 'show',
   initialState,
-  reducers: {},
+  reducers: {
+    changeIsError: (state) => {
+      state.isError = !state.isError;
+      state.errorMessage = '';
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchShows.pending, (state: Draft<ShowState>) => {
       state.isSearchLoading = true;
@@ -34,9 +43,10 @@ export const showSlice = createSlice({
       });
       state.isSearchLoading = false;
     });
-    builder.addCase(fetchShows.rejected, (state: Draft<ShowState>) => {
-      console.log('rejected [fetchShows]');
+    builder.addCase(fetchShows.rejected, (state: Draft<ShowState>, {error}) => {
       state.isSearchLoading = false;
+      state.isError = true;
+      state.errorMessage = error.message;
     });
     builder.addCase(fetchOneShow.pending, (state: Draft<ShowState>) => {
       state.isShowLoading = true;
@@ -46,9 +56,10 @@ export const showSlice = createSlice({
       state.currentShow = action.payload;
       state.isShowLoading = false;
     });
-    builder.addCase(fetchOneShow.rejected, (state: Draft<ShowState>) => {
-      console.log('rejected [fetchOneShow]');
+    builder.addCase(fetchOneShow.rejected, (state: Draft<ShowState>, {error}) => {
       state.isShowLoading = false;
+      state.isError = true;
+      state.errorMessage = error.message;
     });
   }
 });
@@ -59,5 +70,7 @@ export const selectListOfOptions = (state) => state.show.listOfOptions;
 export const selectCurrentShow = (state) => state.show.currentShow;
 export const selectIsSearchLoading = (state) => state.show.isSearchLoading;
 export const selectIsShowLoading = (state) => state.show.isShowLoading;
+export const selectIsError = (state) => state.show.isError;
+export const selectErrorMessage = (state) => state.show.errorMessage;
 
-export const {} = showSlice.actions;
+export const {changeIsError} = showSlice.actions;

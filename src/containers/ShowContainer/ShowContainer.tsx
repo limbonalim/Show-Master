@@ -4,10 +4,10 @@ import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import {selectCurrentShow, selectIsShowLoading} from '../../store/showSlice';
 import {fetchOneShow} from '../../store/showThunks';
+import Loader from '../../components/Loader/Loader';
 import {FormatDate} from '../../components/FormatDate/FormatDate';
 import {Show} from '../../types';
 import NoImage from '../../assets/NoImage.png';
-import Loader from '../../components/Loader/Loader';
 
 const ShowContainer = () => {
   const {id} = useParams();
