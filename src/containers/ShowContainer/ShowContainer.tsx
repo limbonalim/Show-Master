@@ -74,7 +74,7 @@ const ShowContainer = () => {
     }
     if (currentShow.officialSite) {
       website = (
-        <p><a className="btn btn-outline-primary" href={currentShow.officialSite}>Official Site</a></p>
+        <p><a className="btn btn-outline-primary" target="_blank" href={currentShow.officialSite}>Official Site</a></p>
       );
     }
     if (currentShow.premiered) {
