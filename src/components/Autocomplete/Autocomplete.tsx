@@ -5,12 +5,6 @@ import {fetchShows} from '../../store/showThunks';
 import {selectSearchList} from '../../store/showSlice';
 import {Link} from 'react-router-dom';
 
-
-const items = [
-  {label: 'Home', to: '/'},
-  {label: 'About', to: '/about'},
-  {label: 'Contact', to: '/contact'},
-];
 const Autocomplete = () => {
   const dispatch = useAppDispatch();
   const searchList = useAppSelector(selectSearchList);
@@ -22,7 +16,7 @@ const Autocomplete = () => {
       setOptions(searchList.map((item) => {
         return {
           label: item.show.name,
-          to: `/show/${item.show.id}`,
+          to: `/shows/${item.show.id}`,
         };
       }));
     }
@@ -36,15 +30,15 @@ const Autocomplete = () => {
         await dispatch(fetchShows(query));
       }}
       options={options}
-      renderMenu={(results, menuProps) => (
-        <Menu {...menuProps}>
-          {results.map((option, position) => (
+      renderMenu={(results) => (
+        <Menu className="rbt-menu dropdown-menu show w-100 overflow-y-scroll" id="Autocomplete">
+          {results.map(({to, label}) => (
             <Link
-              key={position}
-              to={option.to}
+              key={to}
+              to={to}
               onClick={() => ref.current.clear()}
               className="d-block text-secondary text-decoration-none"
-            >{option.label}</Link>
+            >{label}</Link>
           ))}
         </Menu>
       )}

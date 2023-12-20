@@ -11,9 +11,12 @@ const Layout: React.FC<Props> = ({children}) => {
     <>
       <header className="mb-5">
         <Toolbar/>
-        <Autocomplete></Autocomplete>
+        <div className="col-8 container">
+          <span className="fs-4 text-secondary">Search:</span>
+          <Autocomplete></Autocomplete>
+        </div>
       </header>
-      <main>
+      <main className="container">
         {children}
       </main>
     </>

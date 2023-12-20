@@ -4,6 +4,8 @@ import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import App from './App.tsx';
 import {store} from './app/store';
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 

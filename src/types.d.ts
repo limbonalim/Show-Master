@@ -5,18 +5,17 @@ export interface ApiShow {
 
 export interface Show {
   averageRuntime: number;
-  ended: string;
+  ended: string | null;
   genres: string[];
   id: number;
-  image: { medium: string; original: string; };
+  image: { medium: string; } | null;
   language: string;
   name: string;
-  network: { country: { name: string }, };
+  network: { country: { name: string }, } | null;
   officialSite: string;
   premiered: string;
   rating: { average: number; };
   status: string;
   summary: string;
   type: string;
-  url: string;
 }
