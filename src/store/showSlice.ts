@@ -1,6 +1,6 @@
 import {createSlice, Draft} from '@reduxjs/toolkit';
 import {fetchOneShow, fetchShows} from './showThunks';
-import {ApiShow, Option, Show} from '../types';
+import {Option, Show} from '../types';
 
 interface ShowState {
   listOfOptions: Option[];
@@ -22,11 +22,10 @@ export const showSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchShows.pending, (state: Draft<ShowState>) => {
-      console.log('pending [fetchShows]');
       state.isSearchLoading = true;
+      state.listOfOptions = [];
     });
     builder.addCase(fetchShows.fulfilled, (state: Draft<ShowState>, action) => {
-      console.log('fulfilled [fetchShows]');
       state.listOfOptions = action.payload.map((item): Option => {
         return {
           label: item.show.name,
@@ -40,11 +39,10 @@ export const showSlice = createSlice({
       state.isSearchLoading = false;
     });
     builder.addCase(fetchOneShow.pending, (state: Draft<ShowState>) => {
-      console.log('pending [fetchOneShow]');
       state.isShowLoading = true;
+      state.currentShow = null;
     });
     builder.addCase(fetchOneShow.fulfilled, (state: Draft<ShowState>, action) => {
-      console.log('fulfilled [fetchOneShow]');
       state.currentShow = action.payload;
       state.isShowLoading = false;
     });

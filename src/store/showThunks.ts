@@ -14,7 +14,6 @@ export const fetchOneShow = createAsyncThunk<Show, string>(
   'show/fetchOneShow',
   async (id) => {
     const response = await axiosApi.get<Show>(`/shows/${id}`);
-    console.log(response.data);
     return response.data;
   }
 );

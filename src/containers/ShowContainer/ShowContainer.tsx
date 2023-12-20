@@ -48,10 +48,10 @@ const ShowContainer = () => {
   if (currentShow) {
     if (currentShow.name) {
       name = (<h2>{currentShow.name}</h2>);
-      image = (<img className="float-start me-3 mb-5 rounded" src={NoImage} alt={currentShow.name}/>);
+      image = (<img className="rounded" src={NoImage} alt={currentShow.name}/>);
       if (currentShow.image && currentShow.image.medium) {
         image = (
-          <img className="float-start me-3 mb-3 rounded" src={currentShow.image.medium} alt={currentShow.name}/>);
+          <img className="rounded" src={currentShow.image.medium} alt={currentShow.name}/>);
       }
     }
     if (currentShow.genres.length > 0) {
@@ -97,19 +97,23 @@ const ShowContainer = () => {
   return (
     <>{loading ? <Loader/> :
       <>
-        {image}
-        {name}
-        {genres}
-        {type}
-        {country}
-        {language}
-        {rating}
-        <div>
-          {premiered}
-          {ended}
+        <div className="d-flex gap-3 mb-2">
+          <div>
+            {image}
+          </div>
+          <div>
+            {name}
+            {genres}
+            {type}
+            {country}
+            {language}
+            {rating}
+            {premiered}
+            {ended}
+            {status}
+            {website}
+          </div>
         </div>
-        {status}
-        {website}
         {summary}
       </>
     }
